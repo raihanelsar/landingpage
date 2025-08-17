@@ -1,56 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Dapur R2</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dapur R2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-    <section class="sec">
-        <header>
-        <a href="#"><img src="images/logo.png" class="logo" alt="Logo"></a>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-        </header>
+  <section class="sec">
+    <!-- HEADER -->
+    <header>
+      <a href="#"><img src="images/logo.png" class="logo" alt="Logo"></a>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+        <!-- Dark Mode Toggle -->
+        <li><i class="fa-solid fa-moon dark-toggle" id="darkToggle"></i></li>
+      </ul>
+    </header>
 
-        <div class="content">
-            <div class="texBox">
-                <h2>Rendang</h2>
-                <p>Hidangan berbahan dasar daging yang dihasilkan dari proses memasak suhu rendah dalam waktu lama dengan menggunakan aneka rempah-rempah dan santan.</p>
-                <a href="#">View All Product</a>
-            </div>
-            <div class="imgBOx">
-                <img src="images/rendang.png" class="rendang" alt="Rendang">
-            </div>
-        </div>
-        <ul class="thumb">
-            <li><img src="images/rendang-paru.png" onclick="imgSlider('images/rendang-paru.png');changeBgColor('#bebebe')" alt="Rendang Paru"></li>
-            <li><img src="images/rendang-suwir.png" onclick="imgSlider('images/rendang-suwir.png');changeBgColor('#C0AFC6')" alt="Rendang Suwir"></li>
-            <li><img src="images/rendang-daging.png" onclick="imgSlider('images/rendang-daging.png');changeBgColor('#89838E')" alt="Rendang Daging"></li>
-        </ul>
-        <ul class="sosialMedia">
-            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-        </ul>
-    </section>
+    <!-- CONTENT -->
+    <div class="content">
+      <div class="texBox">
+        <h2>Rendang</h2>
+        <p>Hidangan berbahan dasar daging yang dihasilkan dari proses memasak suhu rendah dalam waktu lama dengan menggunakan aneka rempah-rempah dan santan.</p>
+        <a href="#">View All Product</a>
+      </div>
+      <div class="imgBox">
+        <img src="images/rendang.png" class="rendang" alt="Rendang">
+      </div>
+    </div>
 
-    <script type="text/javascript">
-        function imgSlider(anything){
-            document.querySelector('.rendang').src = anything;
-        }
-        function changeBgColor(color){
-            const sec = document.querySelector('.sec')
-            sec.style.background = color;
-        }
-    </script>
-    
+    <!-- THUMBNAILS -->
+    <ul class="thumb">
+      <li><img src="images/rendang-paru.png" onclick="imgSlider('images/rendang-paru.png');changeBgColor('#bebebe')" alt="Rendang Paru"></li>
+      <li><img src="images/rendang-suwir.png" onclick="imgSlider('images/rendang-suwir.png');changeBgColor('#C0AFC6')" alt="Rendang Suwir"></li>
+      <li><img src="images/rendang-daging.png" onclick="imgSlider('images/rendang-daging.png');changeBgColor('#89838E')" alt="Rendang Daging"></li>
+    </ul>
+
+    <!-- SOCIAL MEDIA -->
+    <ul class="sosialMedia">
+      <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+      <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+      <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+    </ul>
+  </section>
+
+  <!-- SCRIPT -->
+  <script>
+    function imgSlider(src){
+      document.querySelector('.rendang').src = src;
+    }
+    function changeBgColor(color){
+      const sec = document.querySelector('.sec');
+      sec.style.background = color;
+    }
+
+    // DARK MODE TOGGLE
+    const toggleBtn = document.getElementById("darkToggle");
+    const body = document.body;
+
+    // Load mode from localStorage
+    if(localStorage.getItem("darkMode") === "enabled"){
+      body.classList.add("dark");
+      toggleBtn.classList.replace("fa-moon","fa-sun");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      if(body.classList.contains("dark")){
+        toggleBtn.classList.replace("fa-moon","fa-sun");
+        localStorage.setItem("darkMode","enabled");
+      } else {
+        toggleBtn.classList.replace("fa-sun","fa-moon");
+        localStorage.setItem("darkMode","disabled");
+      }
+    });
+  </script>
 </body>
 </html>
